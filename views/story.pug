@@ -1,0 +1,24 @@
+extends layout
+include mixins/storyList
+
+block content
+  article.news-post-section
+    header.main-title-header
+      h1= story.title
+      span.post-author-divider
+        a.writer-name= story.author
+      time(datetime=story.date)= formatDate(story.date)
+    if story.image
+      .flex-rectangle(style="background-image: url('" + base + story.image + "');")
+    .news-post-text
+      if story.body.length
+        each paragraph in story.body
+          p!= paragraph
+      else
+        p
+          em The text of this story was lost when the original Sheffield Streets site went offline.
+
+  .stories-header
+    h2 More Stories
+      img(src=base + 'images/streetsicon.jpg', alt='')
+  +storyList(more)

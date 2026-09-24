@@ -1,11 +1,13 @@
 doctype html
 html(lang='en')
   head
-    include partials/meta
+    meta(charset='utf-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    title= title === 'Sheffield Streets' ? title : title + ' · Sheffield Streets'
+    meta(name='description', content='Stories about the people and places of Sheffield.')
     include partials/stylesheets
-  div
     include partials/scripts
+  body
     include partials/navbar
     block content
     include partials/footer
-     include partials/scripts_footer 

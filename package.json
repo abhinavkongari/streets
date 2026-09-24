@@ -1,33 +1,20 @@
 {
-  "//1": "describes your app and its dependencies",
-  "//2": "https://docs.npmjs.com/files/package.json",
-  "//3": "updating this file will download and update your packages",
-  "name": "hello-express",
-  "version": "0.0.1",
-  "description": "A simple Node app built on Express, instantly up and running.",
+  "name": "sheffield-streets",
+  "version": "1.0.0",
+  "description": "Sheffield Streets: stories about the people and places of Sheffield.",
   "main": "server.js",
+  "private": true,
   "scripts": {
-    "start": "node ./bin/www.js"
+    "start": "node ./bin/www.js",
+    "build": "node build.js"
   },
   "dependencies": {
-    "express": "^4.16.3",
-    "cookie-parser": "^1.4.3",
-    "morgan": "^1.9.0",
-    "body-parser": "^1.18.3",
-    "pug": "^2.0.3",
-    "babel": "^6.23.0",
-    "express-validator": "^5.3.0"
+    "express": "^4.21.2",
+    "morgan": "^1.10.0",
+    "pug": "^3.0.3"
   },
   "engines": {
-    "node": "8.x"
+    "node": ">=18"
   },
-  "repository": {
-    "url": "https://glitch.com/edit/#!/hello-express"
-  },
-  "license": "MIT",
-  "keywords": [
-    "node",
-    "glitch",
-    "express"
-  ]
+  "license": "MIT"
 }

@@ -1,12 +1,5 @@
 #myTopnav.topnav
-  a.nav-image-left(href='/')
-    img(src='images/vectorlogoblack.png')
-  a(style='padding-top: 0.6em', href='#')
-    form
-      input(type='text', name='search', placeholder='Search', style='background-image: url(images/search.png); ')
-  a(href='stories.html') Stories
-  a(href='/story/create') Submit Article 
-  a.icon(href='javascript:void(0);', onclick='myFunction()') ☰
-  
-  
-  
+  a.nav-image-left(href=base)
+    img(src=base + 'images/vectorlogoblack.png', alt='Sheffield Streets')
+  a(href=base + 'stories.html') Stories
+  a.icon(href='javascript:void(0);', onclick='myFunction()', aria-label='Menu') ☰

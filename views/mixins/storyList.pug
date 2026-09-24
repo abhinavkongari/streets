@@ -1,0 +1,20 @@
+mixin storyList(stories)
+  .stories-section
+  each story in stories
+    .stories-box
+      .inside-stories-box
+        a.stories-link-image(href=base + 'stories/' + story.slug + '.html')
+          .story-image-style
+            if story.image
+              img.inside-story-image(src=base + story.image, alt='')
+            else
+              span.inside-story-image
+        .story-text
+          h2
+            a(href=base + 'stories/' + story.slug + '.html')
+              span(style='font-weight: bold; color: rgb(106,20,0)')= story.title
+          span.name-divider
+            a.writer-name= story.author
+          |
+          time(datetime=story.date)= formatDate(story.date)
+    .stories-section

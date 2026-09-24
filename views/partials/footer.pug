@@ -1,15 +1,6 @@
 footer.footer-basic-centered
-  p.footer-company-motto
-    a(href='#', title='Facebook')
-      i.fa.fa-facebook.fa-2x.footer-icon(aria-hidden='true')
-    a(href='#', title='Twitter')
-      i.fa.fa-twitter.fa-2x.footer-icon(aria-hidden='true')
-    a(href='#', title='Instagram')
-      i.fa.fa-instagram.fa-2x.footer-icon(aria-hidden='true')
   p.footer-links
-    a(href='index.html') Home
-    a(href='stories.html') Stories
-    a(href='disclaimer.html') Disclaimer
-    a(href='disclaimer.html#contact') Contact
+    a(href=base) Home
+    a(href=base + 'stories.html') Stories
   p.footer-company-name
-    img.footer-logo(src='images/vectorlogowhite.png')
+    img.footer-logo(src=base + 'images/vectorlogowhite.png', alt='Sheffield Streets')

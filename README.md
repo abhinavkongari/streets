@@ -1,27 +1,24 @@
-Welcome to Glitch
-=================
+# Sheffield Streets
 
-Click `Show` in the header to see your app live. Updates to your code will instantly deploy and update live.
+Stories about the people and places of Sheffield. The site started in 2018 as a WordPress theme ([JervellThomas/sheffieldstreets](https://github.com/JervellThomas/sheffieldstreets)), was rewritten in Express and Pug on Glitch, and went offline when Glitch stopped hosting projects in July 2025. This is the revived version.
 
-**Glitch** is the friendly community where you'll build the app of your dreams. Glitch lets you instantly create, remix, edit, and host an app, bot or site, and you can invite collaborators or helpers to simultaneously edit code with you.
+## Run it
 
-Find out more [about Glitch](https://glitch.com/about).
+```sh
+npm install
+npm start          # http://localhost:3000
+```
 
+## Build a static copy
 
-Your Project
-------------
+```sh
+npm run build      # writes plain HTML to dist/
+```
 
-On the front-end,
-- edit `public/client.js`, `public/style.css` and `views/index.html`
-- drag in `assets`, like images or music, to add them to your project
+`dist/` works on any static host (GitHub Pages, Netlify, Cloudflare Pages). If the site lives under a sub-path, set `SITE_BASE` so the 404 page finds its styles, for example `SITE_BASE=/sheffieldstreetsJS/ npm run build`.
 
-On the back-end,
-- your app starts at `server.js`
-- add frameworks and packages in `package.json`
-- safely store app secrets in `.env` (nobody can see this but you and people you invite)
+## Add a story
 
+Stories live in `data/stories.js`. Each story has a `slug` (its URL), `title`, `author`, `date` (`YYYY-MM-DD`), and `body` (an array of HTML paragraphs). To add a photo, put it in `public/images/` and set `image: "images/<file>"`.
 
-Made by [Fog Creek](https://fogcreek.com/)
--------------------
-
-\ ゜o゜)ノ
+Only "Kid Acne's Stabby Women" still has its full text. The other three stories' text and all story photos were lost with the original WordPress database.

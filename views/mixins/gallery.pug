@@ -1,88 +1,27 @@
-//takes an array of stories to be placed in the small tiles and large tiles 
-mixin gallery(storiesSmallTiles, storiesLargeTiles)
-  //Loads 3 tiles 
-  - for(x = 0, y = 0; y < storiesFeatured.length; x++)
-    .grid__item.desk-one-quarter.lap-and-up-one-quarter.palm-one-half
-      .square.square--img.square--3
-        span.square__bg(style="background-image: url('images/shefworld.jpg');")
-        .square__inner
-          .square__inner__content
-            h3
-              | Sheffield: A City of the World
-            .square-details
-              span.name-divider  Abhimanyu Yadav 
-              time(datetime='2016-11-08  ')
-                | Friday 27 October 2017
-          a.link-wrap(aria-label='Sheffield: A City of the World', href='worldcitysheff.html') Read More
-          
-    - x++ //incraments 1 
-    
-    .grid__item.desk-one-quarter.lap-and-up-one-quarter.palm-one-half
-      .square.square--img.square--3
-        span.square__bg(style="background-image: url('images/shefworld.jpg');")
-        .square__inner
-          .square__inner__content
-            h3
-              | Sheffield: A City of the World
-            .square-details
-              span.name-divider  Abhimanyu Yadav 
-              time(datetime='2016-11-08  ')
-                | Friday 27 October 2017
-          a.link-wrap(aria-label='Sheffield: A City of the World', href='worldcitysheff.html') Read More
-
+//- Lays stories out in rows of three: two small tiles and one wide tile,
+//- with the wide tile swapping sides on every other row.
+mixin tile(story, wide)
+  if wide
     .grid__item.desk-one-half.lap-and-up-one-half.palm-one-whole
-      .square.square--1.square--rectangle.square--img
-        span.square__bg(style="background-image: url('images/starone.jpg');")
-        .square__inner
-          .square__inner__content
-            h3 Student Action for Refugees (STAR)
-            .square-details
-              span.name-divider  Ishita Gupta  
-              time(datetime='2017-08-18  ')
-                | Saturday 28 October 2017
-          a.link-wrap(aria-label='Student Action for Refugees', href='studentstar.html') Read More
-    - y++
-    - if (storiesLargeTiles[y]) //Loads 3 more in reverse if there is another featured story 
+      +tileInner(story, 'square square--1 square--rectangle square--img')
+  else
+    .grid__item.desk-one-quarter.lap-and-up-one-quarter.palm-one-half
+      +tileInner(story, 'square square--img square--3')
 
-      .grid__item.desk-one-half.lap-and-up-one-half.palm-one-whole
-        .square.square--1.square--rectangle.square--img
-          span.square__bg(style="background-image: url('images/starone.jpg');")
-          .square__inner
-            .square__inner__content
-              h3 Student Action for Refugees (STAR)
-              .square-details
-                span.name-divider  Ishita Gupta  
-                time(datetime='2017-08-18  ')
-                  | Saturday 28 October 2017
-            a.link-wrap(aria-label='Student Action for Refugees', href='studentstar.html') Read More
+mixin tileInner(story, classes)
+  div(class=classes)
+    if story.image
+      span.square__bg(style="background-image: url('" + base + story.image + "');")
+    .square__inner
+      .square__inner__content
+        h3= story.title
+        .square-details
+          span.name-divider= story.author
+          |
+          time(datetime=story.date)= formatDate(story.date)
+      a.link-wrap(aria-label=story.title, href=base + 'stories/' + story.slug + '.html') Read More
 
-      - y++ //incrament the featured story count 
-
-      .grid__item.desk-one-quarter.lap-and-up-one-quarter.palm-one-half
-        .square.square--img.square--3
-          span.square__bg(style="background-image: url('images/shefworld.jpg');")
-          .square__inner
-            .square__inner__content
-              h3
-                | Sheffield: A City of the World
-              .square-details
-                span.name-divider  Abhimanyu Yadav 
-                time(datetime='2016-11-08  ')
-                  | Friday 27 October 2017
-            a.link-wrap(aria-label='Sheffield: A City of the World', href='worldcitysheff.html') Read More
-            
-      - x++ //incraments story-NOT-featured count  
-      
-      .grid__item.desk-one-quarter.lap-and-up-one-quarter.palm-one-half
-        .square.square--img.square--3
-          span.square__bg(style="background-image: url('images/shefworld.jpg');")
-          .square__inner
-            .square__inner__content
-              h3
-                | Sheffield: A City of the World
-              .square-details
-                span.name-divider  Abhimanyu Yadav 
-                time(datetime='2016-11-08  ')
-                  | Friday 27 October 2017
-            a.link-wrap(aria-label='Sheffield: A City of the World', href='worldcitysheff.html') Read More
-
+mixin gallery(stories)
+  each story, i in stories
+    - var row = Math.floor(i / 3), pos = i % 3
+    +tile(story, row % 2 === 0 ? pos === 2 : pos === 0)

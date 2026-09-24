@@ -1,7 +1,7 @@
 extends layout
 
 block content
-  h1= message
-  h2= error.status
-  pre #{error.stack}
-
+  .news-post-section
+    h1= message
+    p
+      a(href=base) Back to the home page

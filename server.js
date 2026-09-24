@@ -1,12 +1,9 @@
 var express = require('express');
 var path = require('path');
 var logger = require('morgan');
-var cookieParser = require('cookie-parser');
-var bodyParser = require('body-parser');
 
 var routes = require('./routes/index');
-var users = require('./routes/users');
-var story = require('./routes/story');
+var stories = require('./lib/stories');
 
 var app = express();
 
@@ -14,43 +11,25 @@ var app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 
-app.use(express.static('public'));
-//app.use(express.static(path.join(__dirname, 'public')));
+// `base` prefixes every link and asset path. The static build (build.js)
+// sets it relative to each page so the site works from any sub-path.
+app.locals.base = '/';
+app.locals.formatDate = stories.formatDate;
+
+app.use(logger('dev'));
+app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
-app.use('/users', users);
-app.use('/story', story);
 
-/// catch 404 and forwarding to error handler
-app.use(function(req, res, next) {
-    var err = new Error('Not Found');
-    err.status = 404;
-    next(err);
+// catch 404
+app.use(function(req, res) {
+  res.status(404).render('error', { title: 'Page not found', message: 'Page not found' });
 });
 
-/// error handlers
-
-// development error handler
-// will print stacktrace
-if (app.get('env') === 'development') {
-    app.use(function(err, req, res, next) {
-        res.status(err.status || 500);
-        res.render('error', {
-            message: err.message,
-            error: err
-        });
-    });
-}
-
-// production error handler
-// no stacktraces leaked to user
+// error handler, no stack traces leaked to the user
 app.use(function(err, req, res, next) {
-    res.status(err.status || 500);
-    res.render('error', {
-        message: err.message,
-        error: {}
-    });
+  console.error(err);
+  res.status(500).render('error', { title: 'Something went wrong', message: 'Something went wrong' });
 });
 
-
-module.exports = app; 
+module.exports = app;
