@@ -3,14 +3,13 @@ title: The Winter Garden
 type: place
 category: parks-and-gardens
 neighbourhood: city-centre
-author: streets-editors
+author: abhinav-paul-kongari
 date: 2026-09-25
 summary: A glasshouse forest in the middle of the city centre, free to wander on the wettest day of the year.
 location: [53.3802, -1.4664]
 address: 90 Surrey Street, Sheffield S1 2LH
 image: images/sheffield/winter-garden.jpg
 image_credit: 'Photo: <a href="https://commons.wikimedia.org/wiki/File:Sheffield_Winter_Gardens_-_geograph.org.uk_-_5070602.jpg">Andrew Tryon</a>, <a href="https://creativecommons.org/licenses/by-sa/2.0">CC BY-SA 2.0</a>, via Wikimedia Commons'
-draft: true
 ---
 Step off Surrey Street on a grey afternoon and you walk into a forest. The Winter Garden is one of the largest temperate glasshouses built in the UK in the last hundred years, and it holds thousands of plants from around the world under a roof of curved larch arches.
 

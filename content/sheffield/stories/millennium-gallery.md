@@ -3,14 +3,13 @@ title: Millennium Gallery
 type: place
 category: galleries
 neighbourhood: city-centre
-author: streets-editors
+author: abhinav-paul-kongari
 date: 2026-09-25
 summary: Ruskin's gift to Sheffield's workers, a hall of the city's own steel, and big touring shows.
 location: [53.3796, -1.4655]
 address: Arundel Gate, Sheffield S1 2PP
 image: images/sheffield/millennium-gallery.jpg
 image_credit: 'Photo: <a href="https://commons.wikimedia.org/wiki/File:Millennium_Gallery_Winter_Gardens_Entrance.jpg">Chemical Engineer</a>, <a href="https://creativecommons.org/licenses/by-sa/4.0">CC BY-SA 4.0</a>, via Wikimedia Commons'
-draft: true
 ---
 The Millennium Gallery is a long, bright building joined to the Winter Garden, and it holds two collections you won't find anywhere else.
 

@@ -1,11 +1,10 @@
 ---
 title: "First hour in Sheffield: from the station to the Winter Garden"
-author: streets-editors
+author: abhinav-paul-kongari
 date: 2026-09-25
 summary: Just off the train? This short loop takes in a brutalist landmark, a gallery and a forest under glass.
 distance: About 2 km
 duration: 1 to 2 hours
-draft: true
 # Stops in order. Each is a story from this city; `note` is the
 # walking direction or tip shown under that stop.
 stops:

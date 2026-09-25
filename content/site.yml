@@ -26,3 +26,5 @@ categories:
   history:        { name: History,          colour: "#243238" }
   architecture:   { name: Architecture,     colour: "#555555" }
   people:         { name: People,           colour: "#212121" }
+  walks-and-views: { name: Walks & views,   colour: "#2f5d6b" }
+  local-life:     { name: Local life,       colour: "#7a4b2a" }

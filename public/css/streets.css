@@ -520,3 +520,18 @@ main { min-height: 50vh; padding-bottom: 64px; }
 .kicker--muted { color: var(--muted); }
 h1 .badge, h3 .badge { margin-left: 10px; }
 .explore__list .thumb { font-size: 0; padding: 0; }
+
+/* ---------- Roundups and sources ---------- */
+
+.spots { margin: 8px 0 12px; padding-left: 1.4em; }
+.spot { padding: 8px 0; border-bottom: 1px solid var(--line); scroll-margin-top: 16px; }
+.spot:last-child { border-bottom: 0; }
+.spot strong { display: block; color: var(--heading); }
+.spot .meta { display: block; }
+.spot a { font-size: 0.9rem; font-weight: 600; }
+.spot:target { background: #fff8e6; }
+
+.sources { border-top: 1px solid var(--line); margin-top: 32px; padding-top: 16px; }
+.sources h2 { font-size: 1rem; color: var(--muted); }
+.sources ul { margin: 0; padding-left: 1.2em; font-size: 0.9rem; }
+.spot__note { display: block; }
