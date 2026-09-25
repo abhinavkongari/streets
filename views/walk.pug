@@ -1,0 +1,38 @@
+extends layout
+
+block content
+  .page.page--narrow
+    article.article
+      span.kicker Walk
+      h1
+        = walk.title
+        +draftBadge(walk)
+      p.meta
+        | by
+        |
+        a(href=base + paths.author(walk.author))= walk.authorInfo.name
+      .walk-facts
+        span #{walk.stops.length} stops
+        if walk.distance
+          span= walk.distance
+        if walk.duration
+          span= walk.duration
+      if walk.summary
+        p.article__summary= walk.summary
+
+    +map(pins, 'walk')
+    p.meta(style='margin-top: 6px') Lines show the order of stops, not the exact route. Follow the notes below.
+
+    .article__body(style='margin-top: 24px')
+      != walk.html
+
+    ol.stops
+      each stop, i in walk.stops
+        li.stop
+          span.stop__number= i + 1
+          +kicker(stop.story)
+          h3
+            a(href=base + paths.story(stop.story))= stop.story.title
+            +draftBadge(stop.story)
+          if stop.note
+            p= stop.note

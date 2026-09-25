@@ -1,13 +1,68 @@
+include mixins
+
+- var siteTitle = city ? city.name + ' Streets' : site.name
+- var fullTitle = title === site.name || title === (city && city.name) ? siteTitle : title + ' · ' + siteTitle
+- var description = pageDescription || (city ? city.intro : site.tagline)
+- function here(p) { return path === p ? 'page' : undefined }
+
 doctype html
-html(lang='en')
+html(lang='en-GB')
   head
     meta(charset='utf-8')
     meta(name='viewport', content='width=device-width, initial-scale=1')
-    title= title === 'Sheffield Streets' ? title : title + ' · Sheffield Streets'
-    meta(name='description', content='Stories about the people and places of Sheffield.')
-    include partials/stylesheets
-    include partials/scripts
+    title= fullTitle
+    meta(name='description', content=description)
+    meta(property='og:title', content=fullTitle)
+    meta(property='og:description', content=description)
+    meta(property='og:site_name', content=site.name)
+    if pageImage
+      meta(property='og:image', content=pageImage)
+    link(rel='stylesheet', href=base + 'css/news.css')
+    link(rel='stylesheet', href=base + 'css/footer.css')
+    link(rel='stylesheet', href=base + 'css/streets.css')
+    if pins
+      link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css')
   body
-    include partials/navbar
-    block content
-    include partials/footer
+    if site.drafts
+      .draft-bar Preview with drafts. Items marked DRAFT are not on the live site yet.
+    header.site-header
+      .site-header__inner
+        if city
+          a.site-header__logo(href=base + city.id + '/')
+            img(src=base + city.logo, alt=city.name + ' Streets')
+        else
+          a.site-header__wordmark(href=base) Streets
+        button.site-header__toggle(type='button', aria-expanded='false', aria-controls='site-nav') Menu
+        nav#site-nav.site-header__nav(aria-label='Main')
+          if city
+            a(href=base + city.id + '/map.html', aria-current=here(city.id + '/map.html')) Map
+            a(href=base + city.id + '/walks.html', aria-current=here(city.id + '/walks.html')) Walks
+            a(href=base + city.id + '/collections.html', aria-current=here(city.id + '/collections.html')) Collections
+            a(href=base + city.id + '/stories.html', aria-current=here(city.id + '/stories.html')) Stories
+          else
+            each c in site.cities
+              a(href=base + c.id + '/')= c.name
+          a.site-header__cta(href=base + 'write.html', aria-current=here('write.html')) Write for us
+
+    main
+      block content
+
+    footer.footer-basic-centered
+      p.footer-links
+        a(href=base) All cities
+        if city
+          a(href=base + city.id + '/map.html') Map
+          a(href=base + city.id + '/stories.html') Stories
+        a(href=base + 'write.html') Write for us
+        a(href=base + 'submit.html') Send a story
+      p.footer-company-name
+        if city
+          img.footer-logo(src=base + city.logo_white, alt=city.name + ' Streets')
+        else
+          span.site-header__wordmark(style='color:#fff') Streets
+      p.footer-note Streets began as Sheffield Streets in 2017.
+
+    script(src=base + 'js/site.js')
+    if pins
+      script(src='https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js')
+      script(src=base + 'js/map.js')

@@ -1,24 +1,69 @@
 extends layout
-include mixins/storyList
 
 block content
-  article.news-post-section
-    header.main-title-header
-      h1= story.title
-      span.post-author-divider
-        a.writer-name= story.author
-      time(datetime=story.date)= formatDate(story.date)
-    if story.image
-      .flex-rectangle(style="background-image: url('" + base + story.image + "');")
-    .news-post-text
-      if story.body.length
-        each paragraph in story.body
-          p!= paragraph
-      else
-        p
-          em The text of this story was lost when the original Sheffield Streets site went offline.
+  .page.page--narrow
+    article.article
+      +kicker(story)
+      h1
+        = story.title
+        +draftBadge(story)
+      +storyMeta(story)
+      if story.summary
+        p.article__summary(style='margin-top: 16px')= story.summary
 
-  .stories-header
-    h2 More Stories
-      img(src=base + 'images/streetsicon.jpg', alt='')
-  +storyList(more)
+      if story.closed
+        .notice.notice--warning
+          p
+            strong This place has closed.
+            |  We've kept the story for the record.
+
+      if story.image
+        figure.article__figure
+          img(src=base + story.image, alt=story.image_alt || story.title)
+          if story.image_credit
+            figcaption!= story.image_credit
+
+      .article__body
+        if story.html
+          != story.html
+        else
+          .notice
+            p
+              | The text of this story was lost when the original Sheffield Streets site went offline.
+              | If you have a copy,
+              |
+              a(href=base + 'submit.html?city=' + city.id + '&report=' + story.slug) please send it to us
+              | .
+
+      if story.location
+        section.infobox
+          +map(pins, 'single')
+          .infobox__body
+            h2 Find it
+            if story.address
+              p= story.address
+            .infobox__actions
+              a.btn(href='https://www.google.com/maps/dir/?api=1&destination=' + story.location.join(','), target='_blank', rel='noopener') Directions
+              a.btn.btn--ghost(href=base + 'submit.html?city=' + city.id + '&report=' + story.slug) Report a change
+            p.infobox__checked
+              if story.checked
+                | Details checked by an editor on #{formatDate(story.checked)}.
+              else
+                | Opening times and details change. Check before you go.
+
+      if story.collections.length
+        p.meta
+          | Featured in
+          |
+          each c, i in story.collections
+            a(href=base + paths.collection(c))= c.title
+            if i < story.collections.length - 1
+              | ,
+              |
+
+  if more.length
+    .page.page--narrow
+      section.section
+        .section__head
+          h2= moreHeading
+        +storyList(more)

@@ -1,0 +1,34 @@
+extends layout
+
+block content
+  .page
+    section.hero
+      h1 Local stories and hidden gems, city by city.
+      p.hero__intro
+        | Streets is written by the people who live here: the cafés, galleries, street art and
+        | corners of a city that don't make the guidebooks. Find something new near you, or share
+        | a place you love.
+      .hero__actions
+        a.btn(href=base + site.cities[0].id + '/') Explore #{site.cities[0].name}
+        a.btn.btn--ghost(href=base + 'write.html') Write for us
+
+    section.section
+      .section__head
+        h2 Cities
+      each c in site.cities
+        a.city-card(href=base + c.id + '/')
+          div
+            img(src=base + c.logo, alt=c.name + ' Streets')
+            p= c.intro
+            p.meta(style='margin-top: 8px') #{c.stories.length} stories · #{c.walks.length} walks · #{c.collections.length} collections
+          span.city-card__go Explore →
+
+    section.section
+      .section__head
+        h2 Want Streets in your city?
+      p
+        | We add a city once it has a local editor and enough stories to be worth visiting.
+        | If you'd like to start one,
+        |
+        a(href=base + 'write.html#new-city') here's how
+        | .

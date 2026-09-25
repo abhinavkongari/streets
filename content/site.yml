@@ -1,0 +1,28 @@
+# Site-wide settings for Streets.
+
+name: Streets
+tagline: Local stories and hidden gems, city by city.
+
+# Where the "Write for Streets" form sends submissions.
+# Leave empty to keep the form switched off. Works with Formspree
+# (https://formspree.io): paste your form's endpoint, e.g.
+# https://formspree.io/f/abcdwxyz
+submit_endpoint: ""
+
+# Cities in the order they appear on the home page. Each one needs a
+# folder in content/ with a city.yml inside.
+cities:
+  - sheffield
+
+# Categories every story can use. `colour` tints the tiles and map pins.
+categories:
+  cafes:          { name: Cafés,            colour: "#8a5a2b" }
+  food-and-drink: { name: Food & drink,     colour: "#b31b1b" }
+  galleries:      { name: Galleries,        colour: "#395363" }
+  street-art:     { name: Street art,       colour: "#6a1400" }
+  music:          { name: Music,            colour: "#5b3a73" }
+  shops:          { name: Shops,            colour: "#aa8f6f" }
+  parks-and-gardens: { name: Parks & gardens, colour: "#3d6b3a" }
+  history:        { name: History,          colour: "#243238" }
+  architecture:   { name: Architecture,     colour: "#555555" }
+  people:         { name: People,           colour: "#212121" }

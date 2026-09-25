@@ -1,7 +1,7 @@
 {
-  "name": "sheffield-streets",
+  "name": "streets",
   "version": "1.0.0",
-  "description": "Sheffield Streets: stories about the people and places of Sheffield.",
+  "description": "Streets: local stories and hidden gems, city by city.",
   "main": "server.js",
   "private": true,
   "scripts": {
@@ -10,6 +10,9 @@
   },
   "dependencies": {
     "express": "^4.21.2",
+    "gray-matter": "^4.0.3",
+    "js-yaml": "^5.4.2",
+    "marked": "^18.0.14",
     "morgan": "^1.10.0",
     "pug": "^3.0.3"
   },

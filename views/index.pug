@@ -1,9 +1,0 @@
-extends layout
-include mixins/gallery
-
-block content
-  .news-header
-    h2 Stories
-      img(src=base + 'images/streetsicon.jpg', alt='')
-  #ajaxNews.square-layout.square-skin--news.square-skin--large.grid.grid--full
-    +gallery(stories)

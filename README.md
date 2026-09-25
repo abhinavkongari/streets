@@ -1,24 +1,38 @@
-# Sheffield Streets
+# Streets
 
-Stories about the people and places of Sheffield. The site started in 2018 as a WordPress theme ([JervellThomas/sheffieldstreets](https://github.com/JervellThomas/sheffieldstreets)), was rewritten in Express and Pug on Glitch, and went offline when Glitch stopped hosting projects in July 2025. This is the revived version.
+Local stories and hidden gems, city by city, written by the people who live there. Sheffield is the first city.
+
+Streets began in 2017 as Sheffield Streets, a WordPress site ([JervellThomas/sheffieldstreets](https://github.com/JervellThomas/sheffieldstreets)), was rewritten in Express and Pug on Glitch ([JervellThomas/sheffieldstreetsJS](https://github.com/JervellThomas/sheffieldstreetsJS)), and went offline when Glitch stopped hosting projects in July 2025.
+
+Live site: https://abhinavkongari.github.io/streets/
+
+## Editing
+
+Everything on the site lives in `content/` as Markdown and YAML. See **[EDITING.md](EDITING.md)** for how to add a story, publish a submission, and give someone editor rights.
 
 ## Run it
 
 ```sh
 npm install
-npm start          # http://localhost:3000
+npm start            # http://localhost:3000, drafts shown with a DRAFT badge
+DRAFTS=0 npm start   # exactly what the live site shows
 ```
 
-## Build a static copy
+Content is re-read on every request, so edits show up when you refresh.
+
+## Build
 
 ```sh
-npm run build      # writes plain HTML to dist/
+npm run build        # writes the site to dist/ (published content only)
 ```
 
-`dist/` works on any static host (GitHub Pages, Netlify, Cloudflare Pages). If the site lives under a sub-path, set `SITE_BASE` so the 404 page finds its styles, for example `SITE_BASE=/sheffieldstreetsJS/ npm run build`.
+Every push to `master` builds the site and publishes it to GitHub Pages (see `.github/workflows/deploy.yml`). If content has a mistake, such as an unknown category or a walk stop that doesn't exist, the build stops and names the file and the problem.
 
-## Add a story
+## How it fits together
 
-Stories live in `data/stories.js`. Each story has a `slug` (its URL), `title`, `author`, `date` (`YYYY-MM-DD`), and `body` (an array of HTML paragraphs). To add a photo, put it in `public/images/` and set `image: "images/<file>"`.
-
-Only "Kid Acne's Stabby Women" still has its full text. The other three stories' text and all story photos were lost with the original WordPress database.
+- `content/`: stories, walks, collections, authors, cities and site settings
+- `lib/content.js`: loads and checks the content
+- `lib/pages.js`: the list of every page on the site, used by both the dev server and the build
+- `views/`: Pug templates (`mixins.pug` has the shared pieces)
+- `public/`: CSS, scripts and images, copied as-is
+- Maps use [Leaflet](https://leafletjs.com) and [OpenStreetMap](https://www.openstreetmap.org)

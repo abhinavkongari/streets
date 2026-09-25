@@ -1,0 +1,11 @@
+extends layout
+
+block content
+  .page
+    .page-head
+      span.kicker= city.name
+      h1 Collections
+      p Places grouped by mood, budget and occasion.
+    .cards
+      each collection in city.collections
+        +collectionCard(collection)

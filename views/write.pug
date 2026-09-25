@@ -1,0 +1,64 @@
+extends layout
+
+block content
+  .page.page--narrow
+    article.article
+      span.kicker Write for us
+      h1 Share a place you love
+      p.article__summary
+        | Streets is written by locals. If there's a café, gallery, mural, shop or corner of your
+        | city that more people should know about, we'd love to hear about it.
+      p
+        a.btn(href=base + 'submit.html') Send us a story
+
+      .article__body
+        h2 What we publish
+        p
+          strong Places.
+          |  Short pieces of 150 to 300 words about one spot: why it's special, what to order or look
+          | for, and who's behind it.
+        p
+          strong Stories.
+          |  Longer pieces about the people, history and culture of a place. Local journalism, in
+          | other words.
+        p
+          strong Walks.
+          |  A route through three or more places, with a line or two on getting from one to the next.
+
+        h2 What makes a good Streets place
+        ul
+          li Independent. No chains, and nothing that's already in every guide.
+          li Somewhere you've actually been, recently, and would take a friend.
+          li Somewhere with a story: a person, a history, a reason it exists.
+
+        h2 How to write it
+        ul
+          li Write like you're telling a friend. Be specific: the dish, the painting, the view from the back table.
+          li Say why it matters, not just what it is. No star ratings.
+          li Include the address, and anything a first-timer needs to know.
+          li Keep facts you can't check out of it. Opening times change, so don't list them.
+
+        h2 Photos
+        p
+          | Photos make a place come alive. Send your own, or ones you have permission to use, and
+          | tell us who took them so we can credit them. A link to a shared folder is fine.
+
+        h2 Be fair
+        ul
+          li If you work at, own, or are friends with the people behind a place, tell us. It doesn't rule you out, but readers deserve to know.
+          li We don't publish paid posts or anything written in exchange for free stuff.
+          li Be kind. We don't publish takedowns of small businesses.
+
+        h2 What happens next
+        p
+          | An editor reads every submission. We might ask you questions, and we'll edit for length and
+          | clarity. We'll check the details before anything goes live. When your piece is published it
+          | carries your name, with a writer page listing everything you've written.
+
+        h2#new-city Starting Streets in a new city
+        p
+          | We add a city once it has a local editor and around twenty stories ready to go, so it never
+          | launches empty. If you'd like to start one,
+          |
+          a(href=base + 'submit.html?type=city') tell us about your city
+          | .

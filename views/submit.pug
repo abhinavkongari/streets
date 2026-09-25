@@ -1,0 +1,103 @@
+extends layout
+
+block content
+  .page.page--narrow
+    article.article
+      span.kicker Write for us
+      h1 Send us a story
+      p
+        | Tell us about a place, send a story or a walk, or let us know something has changed. Read the
+        |
+        a(href=base + 'write.html') writing guide
+        |  first if it's your first time.
+
+      if !site.submit_endpoint
+        .notice.notice--warning
+          p
+            strong Submissions aren't switched on yet.
+            |  Check back soon.
+
+      form.form#submit-form(action=site.submit_endpoint || undefined, method='POST')
+        fieldset(disabled=!site.submit_endpoint)
+          .field
+            legend What are you sending?
+            label.choice
+              input(type='radio', name='kind', value='place', checked)
+              span A place (150 to 300 words)
+            label.choice
+              input(type='radio', name='kind', value='story')
+              span A longer story
+            label.choice
+              input(type='radio', name='kind', value='walk')
+              span A walk
+            label.choice
+              input(type='radio', name='kind', value='correction')
+              span A correction, or news that a place has closed
+            label.choice
+              input(type='radio', name='kind', value='city')
+              span I'd like to start Streets in my city
+
+          .form__row
+            .field
+              label(for='f-city') City
+              select#f-city(name='city')
+                each c in site.cities
+                  option(value=c.id)= c.name
+                option(value='other') Somewhere else
+            .field
+              label(for='f-category') Category
+              select#f-category(name='category')
+                option(value='') Not sure
+                each cat in Object.values(site.categories)
+                  option(value=cat.id)= cat.name
+
+          .field
+            label(for='f-title') Title, or the name of the place
+            input#f-title(type='text', name='title', required)
+
+          .field
+            label(for='f-address')
+              | Address or area
+              span.hint A street address, or where to find it. For street art, the nearest corner is fine.
+            input#f-address(type='text', name='address')
+
+          .field
+            label(for='f-body')
+              | Your piece
+              span.hint Paste it in. Plain text is fine.
+            textarea#f-body(name='body', required)
+
+          .field
+            label(for='f-photos')
+              | Photos
+              span.hint A link to a shared folder (Google Drive, Dropbox, iCloud), and who took them.
+            input#f-photos(type='text', name='photos')
+
+          .form__row
+            .field
+              label(for='f-name')
+                | Your name
+                span.hint As you'd like it to appear on the story.
+              input#f-name(type='text', name='name', required, autocomplete='name')
+            .field
+              label(for='f-email')
+                | Your email
+                span.hint Only used to contact you about this.
+              input#f-email(type='email', name='email', required, autocomplete='email')
+
+          .field
+            label.choice
+              input(type='checkbox', name='connection', value='yes')
+              span I work at, own, or know the people behind this place.
+            label.choice
+              input(type='checkbox', name='photo_rights', value='yes')
+              span I took the photos, or have permission to use them.
+            label.choice
+              input(type='checkbox', name='agree', value='yes', required)
+              span I'm happy for editors to edit this for length and clarity before publishing.
+
+          input.honeypot(type='text', name='_gotcha', tabindex='-1', autocomplete='off', aria-hidden='true')
+          input(type='hidden', name='_subject', value='New Streets submission')
+
+          button.btn(type='submit') Send to the editors
+          .form-result#form-result(role='status')

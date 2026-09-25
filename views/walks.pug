@@ -1,0 +1,19 @@
+extends layout
+
+block content
+  .page
+    .page-head
+      span.kicker= city.name
+      h1 Walks
+      p Routes through #{city.name}, put together by people who know them.
+    if city.walks.length
+      .cards
+        each walk in city.walks
+          +walkCard(walk)
+    else
+      .notice
+        p
+          | No walks yet. Know a good route?
+          |
+          a(href=base + 'write.html') Write one for us
+          | .

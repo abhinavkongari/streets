@@ -1,0 +1,12 @@
+extends layout
+
+block content
+  .page
+    .page-head
+      span.kicker= city.name
+      h1= heading
+      p #{stories.length} #{stories.length === 1 ? 'story' : 'stories'}
+    if pins && pins.length
+      +map(pins)
+      div(style='height: 24px')
+    +storyList(stories)

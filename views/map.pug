@@ -1,0 +1,27 @@
+extends layout
+
+block content
+  .page
+    .page-head
+      h1 Map of #{city.name}
+      p Every place on #{city.name} Streets. Tap a pin to read about it, or find what's near you.
+
+    .explore__tools
+      button.btn#near-me(type='button') Near me
+      span.explore__status#near-me-status(role='status')
+    ul.chips(aria-label='Filter by category')
+      li
+        button.chip(type='button', data-filter='all', aria-pressed='true') Everything
+      each cat in Object.values(site.categories)
+        - var n = city.stories.filter(function(s) { return s.category === cat.id && s.location }).length
+        if n
+          li
+            button.chip(type='button', data-filter=cat.id, aria-pressed='false')
+              span.chip__dot(style='background:' + cat.colour)
+              = cat.name
+              span.chip__count= n
+
+    .explore(style='margin-top: 20px')
+      +map(pins, 'explore')
+      .explore__list
+        +storyList(city.stories.filter(function(s) { return s.location }), true)

@@ -1,0 +1,22 @@
+name: Sheffield
+# Wordmark shown in the header on every Sheffield page.
+logo: images/vectorlogoblack.png
+logo_white: images/vectorlogowhite.png
+intro: >-
+  Steel city, city of seven hills, and the greenest city in England.
+  Places worth finding, written by the people who live here.
+
+# Where the map opens.
+map:
+  center: [53.3808, -1.4702]
+  zoom: 13
+
+# Neighbourhoods a story can belong to. The key goes in a story's
+# `neighbourhood:` field and becomes the neighbourhood page's address.
+neighbourhoods:
+  city-centre:   { name: City Centre }
+  kelham-island: { name: Kelham Island }
+  park-hill:     { name: Park Hill }
+  sharrow:       { name: Sharrow }
+  broomhall:     { name: Broomhall & the Botanical Gardens }
+  meersbrook:    { name: Meersbrook }

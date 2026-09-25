@@ -1,7 +1,11 @@
 extends layout
 
 block content
-  .news-post-section
-    h1= message
-    p
-      a(href=base) Back to the home page
+  .page.page--narrow
+    .page-head
+      h1= message
+      p
+        | Try the
+        |
+        a(href=base) home page
+        | .

@@ -1,0 +1,18 @@
+# Everyone who has written for Streets. The key is what a story's
+# `author:` field refers to, and becomes the author page's address.
+
+streets-editors:
+  name: Streets editors
+  bio: The editorial team behind Streets. We check every story before it goes live.
+
+shahd-abdelmohsen:
+  name: Shahd AbdelMohsen
+  bio: Wrote about Sheffield's street art for the original Sheffield Streets in 2017.
+
+ishita-gupta:
+  name: Ishita Gupta
+  bio: Wrote for the original Sheffield Streets in 2017.
+
+abhimanyu-yadav:
+  name: Abhimanyu Yadav
+  bio: Wrote for the original Sheffield Streets in 2017.

@@ -1,0 +1,72 @@
+extends layout
+
+block content
+  .page
+    section.hero
+      h1 #{city.name}, by the people who live here.
+      p.hero__intro= city.intro
+      .hero__actions
+        a.btn(href=base + city.id + '/map.html') Explore the map
+        a.btn.btn--ghost(href=base + 'write.html') Share a place you love
+
+    if city.featured
+      a.feature(href=base + paths.collection(city.featured))
+        span.kicker Start here
+        h2= city.featured.title
+        p= city.featured.summary
+
+  section.section
+    .page
+      .section__head
+        h2 Latest
+        a(href=base + city.id + '/stories.html') All #{city.stories.length} stories →
+    +tiles(city.stories.slice(0, 7))
+
+  .page
+    if city.walks.length
+      section.section
+        .section__head
+          h2 Walks
+          a(href=base + city.id + '/walks.html') All walks →
+        .cards
+          each walk in city.walks.slice(0, 3)
+            +walkCard(walk)
+
+    if city.collections.length
+      section.section
+        .section__head
+          h2 Collections
+          a(href=base + city.id + '/collections.html') All collections →
+        .cards
+          each collection in city.collections.slice(0, 6)
+            +collectionCard(collection)
+
+    section.section
+      .section__head
+        h2 Browse
+      h3 By category
+      ul.chips
+        each cat in Object.values(site.categories)
+          - var n = city.stories.filter(function(s) { return s.category === cat.id }).length
+          if n
+            li
+              a.chip(href=base + paths.category(city, cat.id))
+                span.chip__dot(style='background:' + cat.colour)
+                = cat.name
+                span.chip__count= n
+      if city.stories.some(function(s) { return s.neighbourhood })
+        h3(style='margin-top: 24px') By neighbourhood
+      ul.chips
+        each hood in Object.values(city.neighbourhoods)
+          - var n = city.stories.filter(function(s) { return s.neighbourhood === hood.id }).length
+          if n
+            li
+              a.chip(href=base + paths.neighbourhood(city, hood.id))
+                = hood.name
+                span.chip__count= n
+
+    section.section
+      a.feature(href=base + 'write.html')
+        span.kicker Write for #{city.name} Streets
+        h2 Know a place that deserves a story?
+        p A café with a story, a gallery nobody talks about, a mural you walk past every day. Tell us about it.

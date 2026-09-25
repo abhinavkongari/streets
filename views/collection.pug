@@ -1,0 +1,14 @@
+extends layout
+
+block content
+  .page
+    .page-head
+      span.kicker Collection
+      h1= collection.title
+      if collection.html
+        .article__body(style='max-width: 46em')
+          != collection.html
+    if pins.length
+      +map(pins)
+      div(style='height: 24px')
+    +storyList(collection.stories)

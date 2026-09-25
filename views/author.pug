@@ -1,0 +1,10 @@
+extends layout
+
+block content
+  .page
+    .page-head
+      span.kicker Writer
+      h1= author.name
+      if author.bio
+        p= author.bio
+    +storyList(stories)

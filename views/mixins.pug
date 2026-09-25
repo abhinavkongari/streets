@@ -1,0 +1,91 @@
+//- Small building blocks shared by every page.
+
+mixin draftBadge(item)
+  if item.draft
+    |
+    span.badge.badge--draft Draft
+  if item.closed
+    |
+    span.badge.badge--closed Closed
+
+mixin storyMeta(story)
+  span.meta
+    | by
+    |
+    a(href=base + paths.author(story.author))= story.authorInfo.name
+    |  ·
+    |
+    time(datetime=story.date)= formatDate(story.date)
+
+mixin kicker(story)
+  span.kickers
+    a.kicker(href=base + paths.category(story.city, story.category))= story.categoryInfo.name
+    if story.neighbourhoodInfo
+      span.kicker.kicker--muted(aria-hidden='true') ·
+      a.kicker.kicker--muted(href=base + paths.neighbourhood(story.city, story.neighbourhood))= story.neighbourhoodInfo.name
+
+mixin thumb(story)
+  if story.image
+    a.thumb.thumb--image(href=base + paths.story(story), style="background-image: url('" + base + story.image + "')", aria-hidden='true', tabindex='-1')
+  else
+    a.thumb(href=base + paths.story(story), style='background-color: ' + story.categoryInfo.colour, aria-hidden='true', tabindex='-1')= story.categoryInfo.name
+
+//- A list of stories with thumbnails. `pinned` adds map data for the explore page.
+mixin storyList(stories, pinned)
+  ul.story-list
+    each story in stories
+      li.story-row(data-category=pinned ? story.category : undefined, data-lat=pinned && story.location ? story.location[0] : undefined, data-lng=pinned && story.location ? story.location[1] : undefined)
+        +thumb(story)
+        div
+          +kicker(story)
+          h3
+            a(href=base + paths.story(story))= story.title
+            +draftBadge(story)
+          +storyMeta(story)
+          if pinned
+            |
+            span.explore__distance
+          if story.summary
+            p= story.summary
+
+//- Big image tiles in rows of three: two small and one wide, the wide tile
+//- swapping sides on every other row.
+mixin tiles(stories)
+  .tiles
+    .square-layout.square-skin--news.square-skin--large.grid.grid--full
+      each story, i in stories
+        - var row = Math.floor(i / 3), pos = i % 3
+        - var wide = row % 2 === 0 ? pos === 2 : pos === 0
+        div(class=wide ? 'grid__item desk-one-half lap-and-up-one-half palm-one-whole' : 'grid__item desk-one-quarter lap-and-up-one-quarter palm-one-half')
+          div(class=wide ? 'square square--1 square--rectangle square--img' : 'square square--img square--3', style=story.image ? undefined : 'background: ' + story.categoryInfo.colour)
+            if story.image
+              span.square__bg(style="background-image: url('" + base + story.image + "');")
+            .square__inner
+              .square__inner__content
+                if story.draft
+                  span.badge.badge--draft Draft
+                h3= story.title
+                .square-details
+                  | #{story.categoryInfo.name} · #{story.authorInfo.name}
+              a.link-wrap(aria-label=story.title, href=base + paths.story(story)) Read more
+
+mixin walkCard(walk)
+  a.card(href=base + paths.walk(walk))
+    span.kicker Walk · #{walk.stops.length} stops
+    h3
+      = walk.title
+      +draftBadge(walk)
+    if walk.summary
+      p= walk.summary
+    span.meta= [walk.distance, walk.duration].filter(Boolean).join(' · ')
+
+mixin collectionCard(collection)
+  a.card(href=base + paths.collection(collection))
+    - var allPlaces = collection.stories.every(function(s) { return s.type === 'place' })
+    span.kicker Collection · #{collection.stories.length} #{allPlaces ? 'places' : 'stories'}
+    h3= collection.title
+    if collection.summary
+      p= collection.summary
+
+mixin map(pins, mode)
+  .map(class=mode === 'walk' ? 'map--walk' : undefined, data-mode=mode || 'pins', data-pins=JSON.stringify(pins), role='region', aria-label='Map')
