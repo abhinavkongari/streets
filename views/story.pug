@@ -51,6 +51,36 @@ block content
               else
                 | Opening times and details change. Check before you go.
 
+      if story.spots && story.spots.length
+        section.infobox
+          +map(pins)
+          .infobox__body
+            h2 Places in this story
+            ol.spots
+              each spot, i in story.spots
+                li.spot(id='spot-' + (i + 1))
+                  strong= spot.name
+                  if spot.note
+                    span.spot__note= spot.note
+                  if spot.address
+                    span.meta= spot.address
+                  a(href='https://www.google.com/maps/dir/?api=1&destination=' + spot.location.join(','), target='_blank', rel='noopener') Directions
+            p.infobox__checked
+              if story.checked
+                | Details checked by an editor on #{formatDate(story.checked)}.
+              else
+                | Places open, close and change. Check before you go.
+            .infobox__actions
+              a.btn.btn--ghost(href=base + 'submit.html?city=' + city.id + '&report=' + story.slug) Report a change
+
+      if story.sources && story.sources.length
+        section.sources
+          h2 Sources
+          ul
+            each source in story.sources
+              li
+                a(href=source.url, rel='noopener')= source.title
+
       if story.collections.length
         p.meta
           | Featured in
