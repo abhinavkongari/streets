@@ -34,14 +34,17 @@
     if (!pins.length) { el.hidden = true; return; }
 
     var map = L.map(el, { scrollWheelZoom: mode === 'explore' });
+    // Standard OpenStreetMap tiles, softened in streets.css (.leaflet-tile-pane)
+    // so the pins stand out.
     L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
       maxZoom: 19,
       attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
     }).addTo(map);
 
     var markers = pins.map(function(pin, i) {
-      var label = mode === 'walk' ? String(i + 1) : '';
-      var colour = mode === 'walk' ? 'rgb(106,20,0)' : pin.colour;
+      // Walk stops and the places in a roundup are numbered to match their lists.
+      var label = mode === 'walk' ? String(i + 1) : (pin.number ? String(pin.number) : '');
+      var colour = label ? 'rgb(106,20,0)' : pin.colour;
       var marker = L.marker([pin.lat, pin.lng], { icon: pinIcon(colour, label), title: pin.title })
         .bindPopup(popup(pin))
         .addTo(map);

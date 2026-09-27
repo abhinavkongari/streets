@@ -17,12 +17,18 @@ mixin storyMeta(story)
     |
     time(datetime=story.date)= formatDate(story.date)
 
+//- A neighbourhood label styled like a UK street nameplate.
+mixin streetSign(hood, city, size)
+  a.street-sign(class=size ? 'street-sign--' + size : undefined, href=base + paths.neighbourhood(city, hood.id))
+    span= hood.name
+    if hood.postcode
+      span.street-sign__postcode= hood.postcode
+
 mixin kicker(story)
   span.kickers
     a.kicker(href=base + paths.category(story.city, story.category))= story.categoryInfo.name
     if story.neighbourhoodInfo
-      span.kicker.kicker--muted(aria-hidden='true') ·
-      a.kicker.kicker--muted(href=base + paths.neighbourhood(story.city, story.neighbourhood))= story.neighbourhoodInfo.name
+      +streetSign(story.neighbourhoodInfo, story.city)
 
 mixin thumb(story)
   if story.image

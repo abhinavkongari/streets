@@ -2,7 +2,8 @@ include mixins
 
 - var siteTitle = city ? city.name + ' Streets' : site.name
 - var fullTitle = title === site.name || title === (city && city.name) ? siteTitle : title + ' · ' + siteTitle
-- var description = pageDescription || (city ? city.intro : site.tagline)
+- var description = pageDescription || (story && story.summary) || (walk && walk.summary) || (collection && collection.summary) || (city ? city.intro : site.tagline)
+- var shareImage = site.url + ((story && story.image) || (walk && walk.stops[0].story.image) || 'images/share.png')
 - function here(p) { return path === p ? 'page' : undefined }
 
 doctype html
@@ -15,8 +16,14 @@ html(lang='en-GB')
     meta(property='og:title', content=fullTitle)
     meta(property='og:description', content=description)
     meta(property='og:site_name', content=site.name)
-    if pageImage
-      meta(property='og:image', content=pageImage)
+    meta(property='og:type', content=story ? 'article' : 'website')
+    meta(property='og:url', content=site.url + (path && path !== 'index.html' ? path : ''))
+    meta(property='og:image', content=shareImage)
+    meta(name='twitter:card', content='summary_large_image')
+    meta(name='theme-color', content='#6a1400')
+    link(rel='icon', href=base + 'favicon.svg', type='image/svg+xml')
+    link(rel='icon', href=base + 'favicon-32.png', sizes='32x32', type='image/png')
+    link(rel='apple-touch-icon', href=base + 'apple-touch-icon.png')
     link(rel='stylesheet', href=base + 'css/news.css')
     link(rel='stylesheet', href=base + 'css/footer.css')
     link(rel='stylesheet', href=base + 'css/streets.css')

@@ -4,7 +4,12 @@ block content
   .page
     .page-head
       span.kicker= city.name
-      h1= heading
+      if hood
+        h1.street-sign-heading
+          span.visually-hidden= heading
+          +streetSign(hood, city, 'large')
+      else
+        h1= heading
       p #{stories.length} #{stories.length === 1 ? 'story' : 'stories'}
     if pins && pins.length
       +map(pins)

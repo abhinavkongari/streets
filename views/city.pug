@@ -56,14 +56,12 @@ block content
                 span.chip__count= n
       if city.stories.some(function(s) { return s.neighbourhood })
         h3(style='margin-top: 24px') By neighbourhood
-      ul.chips
+      ul.chips.chips--signs
         each hood in Object.values(city.neighbourhoods)
           - var n = city.stories.filter(function(s) { return s.neighbourhood === hood.id }).length
           if n
             li
-              a.chip(href=base + paths.neighbourhood(city, hood.id))
-                = hood.name
-                span.chip__count= n
+              +streetSign(hood, city, 'medium')
 
     section.section
       a.feature(href=base + 'write.html')
