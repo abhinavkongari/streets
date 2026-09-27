@@ -1,6 +1,9 @@
 # Site-wide settings for Streets.
 
 name: Streets
+
+# Where the live site is published. Used for link previews on social media.
+url: https://abhinavkongari.github.io/streets/
 tagline: Local stories and hidden gems, city by city.
 
 # Where the "Write for Streets" form sends submissions.

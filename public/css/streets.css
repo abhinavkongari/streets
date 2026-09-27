@@ -535,3 +535,84 @@ h1 .badge, h3 .badge { margin-left: 10px; }
 .sources h2 { font-size: 1rem; color: var(--muted); }
 .sources ul { margin: 0; padding-left: 1.2em; font-size: 0.9rem; }
 .spot__note { display: block; }
+
+/* ---------- Road markings ----------
+   The dashed centre line from the logo's road icon, used as the site's
+   dividers. */
+
+:root {
+  --road-dash: repeating-linear-gradient(90deg, var(--maroon) 0 28px, transparent 28px 44px);
+  --road: #26292b;
+}
+
+.section__head { border-bottom: 0; position: relative; padding-bottom: 12px; }
+.section__head::after {
+  content: "";
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  height: 3px;
+  background: var(--road-dash);
+}
+
+/* A strip of road under the header and above the footer. */
+.site-header::after,
+.footer-basic-centered::before {
+  content: "";
+  display: block;
+  height: 10px;
+  background:
+    repeating-linear-gradient(90deg, #fff 0 26px, transparent 26px 46px) center / 100% 2px no-repeat,
+    var(--road);
+}
+
+.footer-basic-centered { position: relative; padding-top: 55px; }
+.footer-basic-centered::before { position: absolute; top: 0; left: 0; right: 0; }
+
+/* ---------- Street signs ----------
+   Neighbourhoods look like UK street nameplates: a white plate with a
+   black border and an inner rule, and the postcode district in maroon. */
+
+.street-sign {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.5em;
+  background: #fff;
+  color: #1b1b1b;
+  border: 2px solid #1b1b1b;
+  border-radius: 4px;
+  box-shadow: inset 0 0 0 2px #fff, inset 0 0 0 3px #1b1b1b;
+  padding: 4px 10px 3px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  line-height: 1.3;
+  text-transform: uppercase;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.street-sign:hover { background: #fff8e6; color: #1b1b1b; }
+.street-sign__postcode { color: var(--maroon); }
+
+.street-sign--medium { font-size: 0.85rem; padding: 7px 14px 6px; }
+
+.street-sign--large {
+  font-size: clamp(1.2rem, 4vw, 1.9rem);
+  padding: 12px 22px 10px;
+  border-width: 3px;
+  box-shadow: inset 0 0 0 3px #fff, inset 0 0 0 5px #1b1b1b;
+  white-space: normal;
+}
+
+.street-sign-heading { margin: 10px 0 16px; }
+.kickers { align-items: center; gap: 6px 12px; }
+.chips--signs { gap: 10px; }
+
+/* Soften the OpenStreetMap tiles so the maroon pins stand out. */
+.map .leaflet-tile-pane { filter: saturate(0.35) brightness(1.05) contrast(0.9); }
+
+/* Long neighbourhood names wrap instead of pushing the layout wide. */
+.street-sign { white-space: normal; max-width: 100%; }
+.story-row { grid-template-columns: 200px minmax(0, 1fr); }
+@media (max-width: 560px) { .story-row { grid-template-columns: 110px minmax(0, 1fr); } }
+.explore__list .story-row { grid-template-columns: 84px minmax(0, 1fr); }

@@ -13,10 +13,11 @@ map:
 
 # Neighbourhoods a story can belong to. The key goes in a story's
 # `neighbourhood:` field and becomes the neighbourhood page's address.
+# `postcode` is the district shown on the neighbourhood's street sign.
 neighbourhoods:
-  city-centre:   { name: City Centre }
-  kelham-island: { name: Kelham Island }
-  park-hill:     { name: Park Hill }
-  sharrow:       { name: Sharrow }
-  broomhall:     { name: Broomhall & the Botanical Gardens }
-  meersbrook:    { name: Meersbrook }
+  city-centre:   { name: City Centre, postcode: S1 }
+  kelham-island: { name: Kelham Island, postcode: S3 }
+  park-hill:     { name: Park Hill, postcode: S2 }
+  sharrow:       { name: Sharrow, postcode: S11 }
+  broomhall:     { name: Broomhall & the Botanical Gardens, postcode: S10 }
+  meersbrook:    { name: Meersbrook, postcode: S8 }
